@@ -26,8 +26,7 @@ const FeedPost = ({ post , index, initialPreloaded=false}: {post:Post, index:num
         document.getElementById('imgContainer-' + index)?.appendChild(img);
         resolve(); // Resolve the Promise when the image is loaded
       };
-      img.onerror = (error) => {
-        console.log('Error Loading image: ' + error);
+      img.onerror = () => {
         const divErrorMessage = document.createElement('div');
         divErrorMessage.id = 'img-error-' + index;
         divErrorMessage.setAttribute('data-testid', divErrorMessage.id);
@@ -39,8 +38,12 @@ const FeedPost = ({ post , index, initialPreloaded=false}: {post:Post, index:num
   };
 
   const loadImage = async () => {
-    await preloadImage(index);
-    setPreloaded(true);
+    try {
+      await preloadImage(index);
+      setPreloaded(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
   useEffect(() => {
     loadImage()
