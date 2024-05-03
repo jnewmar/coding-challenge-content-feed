@@ -9,7 +9,7 @@ export async function getServerSideProps() {
     const response = await fetch(API_ENDPOINT, {
       headers: {
         'Accept': 'application/json',
-        'Prefer': 'code=200, ' + API_DYNAMIC 
+        'Prefer': 'code=200, ' + API_DYNAMIC
       }
     });
     if (!response.ok) {
@@ -31,23 +31,23 @@ export default function Home({ initialContent = [] } : {initialContent: Post[]})
 
   useEffect(() => {
     if (content && content.length > 0) {
-        setLoading(false);
+      setLoading(false);
     }
-  }, [content]);
-  
+  }, [content, setLoading]);
+
   if (error) {
     return <div className="text-center">Error: {error.message}</div>;
   }
 
   return (
     <div className="container flex flex-col items-center">
-        {loading ? 
-          (<p className="text-center" data-testid="loading" id="loading">Loading...</p>)
+      {loading ?
+        (<p className="text-center" data-testid="loading" id="loading">Loading...</p>)
         :
         (<>
           {content.map((item, index) => (
             <FeedPost key={item.id} index={index} post={item} />
-            ))} 
+          ))}
         </>)}
     </div>
   );

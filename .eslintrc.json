@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+    "jest": true 
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "next/core-web-vitals"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "indent": ["error", 2],
+    "no-trailing-spaces": "error",
+    "keyword-spacing": "error",
+    "no-irregular-whitespace": "error",
+    //"max-len": ["error", { "code": 100 }],
+    "react/prop-types": "off" // Disable prop-types checking if you're using TypeScript or PropTypes
+  }
 }

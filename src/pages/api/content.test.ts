@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types';
 import handler from './content'; // Import your API handler function
 import fetchMock from 'jest-fetch-mock';
 
-  
+
 // Mock the fetch function before running any tests
 beforeAll(() => {
   // Enable fetch mock
@@ -30,7 +30,7 @@ describe('API Route: /api/content', () => {
     body: {}, // Set the request body
     headers: {}, // Set the request headers
     cookies: {}, // Set the request cookies
-};
+  };
 
   it('should fetch content successfully', async () => {
     // Mock fetch to return a successful response with mock data

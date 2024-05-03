@@ -3,7 +3,7 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import FeedPost from '../components/FeedPost';
-import * as Utils from '../utils/utils'; 
+import * as Utils from '../utils/utils';
 
 const mockPost = {
   id: 1,
@@ -21,23 +21,23 @@ const mockPost = {
 
 const mockLongPost = {
   ...mockPost,
-  description: 'This is a test description.'.repeat(10), // A description longer than 150 characters
+  description: 'This is a test description.'.repeat(10),
 };
 
- describe('FeedPost', () => {
+describe('FeedPost', () => {
   it('renders with correct post data with short descripton', async () => {
     render(<FeedPost post={mockPost} index={0} initialPreloaded={true} />);
     debug();
 
-    expect(screen.getByText('Test Post')).toBeInTheDocument(); // Check if title is rendered
-    expect(screen.getByText('Test Subtitle')).toBeInTheDocument(); // Check if subtitle is rendered
-    expect(screen.getByText('Test Author')).toBeInTheDocument(); // Check if author is rendered
-    expect(screen.getByText('Comment Author 1:')).toBeInTheDocument(); // Check if first comment is rendered
-    expect(screen.getByText('Comment Message 1')).toBeInTheDocument(); // Check if first comment message is rendered
-    expect(screen.getByText('Comment Author 2:')).toBeInTheDocument(); // Check if second comment is rendered
-    expect(screen.getByText('Comment Message 2')).toBeInTheDocument(); // Check if second comment message is rendered
+    expect(screen.getByText('Test Post')).toBeInTheDocument();
+    expect(screen.getByText('Test Subtitle')).toBeInTheDocument();
+    expect(screen.getByText('Test Author')).toBeInTheDocument();
+    expect(screen.getByText('Comment Author 1:')).toBeInTheDocument();
+    expect(screen.getByText('Comment Message 1')).toBeInTheDocument();
+    expect(screen.getByText('Comment Author 2:')).toBeInTheDocument();
+    expect(screen.getByText('Comment Message 2')).toBeInTheDocument();
     expect(screen.getByTestId('description')).toBeInTheDocument();
-    expect(screen.getByTestId('description')).toHaveTextContent('This is a test description.'); // Check if description is rendered
+    expect(screen.getByTestId('description')).toHaveTextContent('This is a test description.');
     // Check if Read More link is not present
     expect(screen.queryByTestId('readMore')).toBeNull();
 
@@ -91,8 +91,8 @@ const mockLongPost = {
       const index = 0;
 
       const mockImage = new Image();
-      const preloadImageMock = jest.spyOn(Utils, 'createImageElement'); 
-    
+      const preloadImageMock = jest.spyOn(Utils, 'createImageElement');
+
       preloadImageMock.mockImplementation(() => {
         return mockImage;
       });
@@ -114,8 +114,8 @@ const mockLongPost = {
       const index = 0;
 
       const mockImage = new Image();
-      const preloadImageMock = jest.spyOn(Utils, 'createImageElement'); 
-    
+      const preloadImageMock = jest.spyOn(Utils, 'createImageElement');
+
       preloadImageMock.mockImplementation(() => {
         return mockImage;
       });

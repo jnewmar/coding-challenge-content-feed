@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
 import { API_DYNAMIC, API_ENDPOINT } from "../../constants/config";
-import { ExternalPost, Post } from "../../types/types";
 import { processContentData } from "../../utils/dataProcessor";
+import { Post } from "../../types/types";
 
 // pages/api/content.ts
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         'Prefer': 'code=200,' + API_DYNAMIC
       }
     });
-    const data = await response.json(); 
+    const data = await response.json();
     const out: Post[] = processContentData(data.contentCards);
     res.status(200).json(out);
   } catch (error) {
