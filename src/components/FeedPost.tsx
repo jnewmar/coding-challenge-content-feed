@@ -1,7 +1,7 @@
 
 
 import { Post } from '@/types/types';
-import { createImageElement } from '../utils/utils';
+import { createImageElement, getImageFormat } from '../utils/utils';
 import React, { useState, useEffect } from 'react';
 
 const FeedPost = ({ post , index, initialPreloaded=false}: {post:Post, index:number, initialPreloaded:boolean}) => {
@@ -20,9 +20,11 @@ const FeedPost = ({ post , index, initialPreloaded=false}: {post:Post, index:num
       img.id = 'img-' + index;
       img.setAttribute('data-testid', img.id);
       img.src = post.imageUri;
-      img.className = "w-full max-h-96 object-cover rounded-md";
       img.alt = post.title;
+
+
       img.onload = () => {
+        img.className = getImageFormat(img.width, img.height);
         document.getElementById('imgContainer-' + index)?.appendChild(img);
         resolve(); // Resolve the Promise when the image is loaded
       };
@@ -53,8 +55,7 @@ const FeedPost = ({ post , index, initialPreloaded=false}: {post:Post, index:num
   return (
     <div id={`postContainer-${index}`} className="max-w-xl rounded overflow-hidden shadow-xl my-4" style={{ display: preloaded ? 'block' : 'none' }}>
       <div>
-        <div className="w-full bg-black flex flex-col items-center" id={`imgContainer-${index}`}>
-
+        <div className="w-full max-h-96 justify-center items-center bg-black flex flex-col overflow-hidden" id={`imgContainer-${index}`}>
         </div>
         <div className="max-w-xl w-full px-6 py-4">
           <div className="w-1/2 font-bold truncate text-xl float-left">{post.title}</div>

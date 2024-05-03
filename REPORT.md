@@ -2,7 +2,7 @@
 
 ## Thought Process:
 
-- Framework Selection: Chose Next.js for its server-side rendering capabilities and ease of setup.
+- Framework Selection: Choose Next.js for its server-side rendering capabilities and ease of setup.
 - Component Structure: Designed a component structure to display content feed posts and comments.
 - Data Retrieval: Implemented a route to fetch data from an external API endpoint and process it.
 - Data Processing: Extracted and normalized relevant data properties, sorted posts by priority, and handled image loading.
@@ -31,21 +31,30 @@
 
 ## Challenges Faced:
 
+
 - Image Loading Optimization: Ensuring smooth loading of images, only displaying the post after the image is loaded.
-- Handling images with aspect ratios that vary significantly. Trying to show the images well in most cases, using only CSS without and not using any server-side cropper and resizer solution.
-- Identity the 3 line limit for use the 'Read More' in multiple screen sizes, for the sake of simplicity, I have assumed a limit of 150 chars lenght in the conent to show the 'Read More'
+- Handling images with aspect ratios that vary significantly.
+- Identify the 3-line limit for using the 'Read More' in multiple screen sizes, for the sake of simplicity, I have assumed a limit of 150 chars length in the content to show the 'Read More'
 - Handle responsiveness for multiple screen sizes
+- Handling images with aspect ratios that vary significantly and also multiple resolutions:
+    - to solve that we have implemented a function to choose a distinct set of CSS classes we try to avoid image distortions in low-resolution images, and also in images that are a lot higher than larger - ratio (width/height) more than 0.6 
+        - images with width and height lower than 200px: the image container has the same height as the image, the image is vertically centralized in the image container that has a black background
+        - images with width bigger than 200px and height lower than 200px: the image container has the same height as the image, the image is vertically centralized in the image container that has a black background
+        - images with width lower than 200px and a height bigger than 200px: the image container limits the image height, the image is vertically centralized in the image container that has a black background
+        - images with width and height bigger 200px and ratio (width/height) less or equal to 0.6: the image container limits the image height, the aspect ratio is kept, and the image is vertically centralized in the image container that has a black background
+        - images with width and height bigger than 200px and ratio (width/height) more than 0.6: the image container limits the image height, and the image is vertically centralized in the image container that has a black background, and depending on the aspect ratio of the image it could cover all the width
 
 ## Possible improvements
 
-Since this is coding callenge with a limited time for the implementation and not a real word application, in some cases some simplified solutions were applied, instead of a more robust solution.
-Here some points that could be improved thinking in a real word application:
+Since this is a coding challenge with a limited time for the implementati on and not a real word application, in some cases some simplified solutions were applied, instead of a more robust solution.
+Here are some points that could be improved thinking in a real word application:
 
 - Centralize the authors in a distinct entity, to handle posts and comments with the same author
 - Load the posts in slices, with a pagination/cache
 - Only display the next post if the previous one has been loaded
-- Identify the image posts size ratio to handle ina distinct way some proporsions. 
-- Use a server-side cropper and/or resizer to handle the image posts for the multiple screen sizes.
+- When the post is created, force the user to crop the image to fit well in the interface 
+- Use a server-side cropper and/or resizer to handle the image posts for multiple screen sizes.
+
 
 ## Application Structure:
 
@@ -87,6 +96,7 @@ The tests are in the *.test.ts and *.test.tsx files
 
 Test report:
 ````
+------------------------|---------|----------|---------|---------|-------------------
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ------------------------|---------|----------|---------|---------|-------------------
 All files               |     100 |      100 |     100 |     100 |                   
@@ -103,11 +113,11 @@ All files               |     100 |      100 |     100 |     100 |
  utils                  |     100 |      100 |     100 |     100 |                   
   dataProcessor.ts      |     100 |      100 |     100 |     100 |                   
   utils.ts              |     100 |      100 |     100 |     100 |                   
-
+------------------------|---------|----------|---------|---------|-------------------
 
 Test Suites: 6 passed, 6 total
-Tests:       18 passed, 18 total
+Tests:       24 passed, 24 total
 Snapshots:   0 total
-Time:        2.207 s
+Time:        2.301 s
 Ran all test suites.
 ````
