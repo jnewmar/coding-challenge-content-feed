@@ -1,4 +1,3 @@
-import { debug } from 'jest-preview';
 import React, { useEffect } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -45,15 +44,10 @@ describe('useContentFetcher', () => {
 
     render(<Component />);
 
-    // Assert loading state
     expect(screen.getByText('Loading...')).toBeInTheDocument();
 
     expect(global.fetch).toHaveBeenCalledWith(API_ENDPOINT_INTERNAL);
-    // // Wait for fetch to resolve
-    // await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
 
-    debug();
-    // Assert fetched content
     await waitFor(() => expect(screen.getByText('Test Post')).toBeInTheDocument());
 
   });

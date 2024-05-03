@@ -1,12 +1,9 @@
-// pages/api/content.test.ts
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import handler from './content'; // Import your API handler function
+import handler from './content';
 import fetchMock from 'jest-fetch-mock';
 
 
-// Mock the fetch function before running any tests
 beforeAll(() => {
-  // Enable fetch mock
   fetchMock.enableMocks();
 });
 
@@ -33,7 +30,6 @@ describe('API Route: /api/content', () => {
   };
 
   it('should fetch content successfully', async () => {
-    // Mock fetch to return a successful response with mock data
     fetchMock.mockResponseOnce(JSON.stringify({ contentCards :[
       {
         id: 1,
@@ -49,13 +45,10 @@ describe('API Route: /api/content', () => {
       },
     ]}), { status: 200 });
 
-    // Act: Make a request to the handler function
     await handler(mockRequest, mockResponse);
 
-    // Assert: Check if the response is successful
     expect(mockResponse.status).toHaveBeenCalledWith(200);
 
-    // Assert: Check if the response body matches the expected format
     const expectedPost = {
       id: 1,
       imageUri: 'https://picsum.photos/500/500',
@@ -70,13 +63,10 @@ describe('API Route: /api/content', () => {
   });
 
   it('should return 500 error if fetch fails', async () => {
-    // Mock fetch to return a failed response
     fetchMock.mockReject(new Error('Failed to fetch'));
 
-    // Act: Make a request to the handler function
     await handler(mockRequest, mockResponse);
 
-    // Assert: Check if the response is a 500 error
     expect(mockResponse.status).toHaveBeenCalledWith(500);
     expect(mockResponse.json).toHaveBeenCalledWith({ error: 'Error fetching content' });
   });

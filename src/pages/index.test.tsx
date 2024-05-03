@@ -45,7 +45,7 @@ describe('Home Page', () => {
       textData: {
         title: 'string',
         subTitle: 'string',
-        body: 'string'.repeat(100), // Adjust according to your needs
+        body: 'string'.repeat(100),
         author: { first: 'string', last: 'string' },
       },
       metadata: { priority: 100, publishDate: '2019-08-24T14:15:22Z' },

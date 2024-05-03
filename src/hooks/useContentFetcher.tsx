@@ -18,8 +18,7 @@ const useContentFetcher = (initialContent:Post[]) => {
       setError(error);
       setLoading(false);
     } finally {
-      //console.log('Fetch complete', content);
-      setLoading(false); // Always set loading to false after fetching
+      setLoading(false);
     }
   };
 
@@ -32,12 +31,6 @@ const useContentFetcher = (initialContent:Post[]) => {
       fetchData();
     }
   }, [initialContent]);
-
-
-  // useEffect(() => {
-  //   setLoading(!fetchComplete);
-  // }, [fetchComplete]);
-
 
   return { content, loading, error, fetchComplete, setLoading };
 };
