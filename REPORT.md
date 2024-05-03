@@ -31,9 +31,21 @@
 
 ## Challenges Faced:
 
-- Image Loading Optimization: Ensuring smooth loading of images, especially when aspect ratios vary significantly.
-- String Length Assumption: Making assumptions about the length of post comments and handling them appropriately.
+- Image Loading Optimization: Ensuring smooth loading of images, only displaying the post after the image is loaded.
+- Handling images with aspect ratios that vary significantly. Trying to show the images well in most cases, using only CSS without and not using any server-side cropper and resizer solution.
+- Identity the 3 line limit for use the 'Read More' in multiple screen sizes, for the sake of simplicity, I have assumed a limit of 150 chars lenght in the conent to show the 'Read More'
 - Handle responsiveness for multiple screen sizes
+
+## Possible improvements
+
+Since this is coding callenge with a limited time for the implementation and not a real word application, in some cases some simplified solutions were applied, instead of a more robust solution.
+Here some points that could be improved thinking in a real word application:
+
+- Centralize the authors in a distinct entity, to handle posts and comments with the same author
+- Load the posts in slices, with a pagination/cache
+- Only display the next post if the previous one has been loaded
+- Identify the image posts size ratio to handle ina distinct way some proporsions. 
+- Use a server-side cropper and/or resizer to handle the image posts for the multiple screen sizes.
 
 ## Application Structure:
 
