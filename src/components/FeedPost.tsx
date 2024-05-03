@@ -47,7 +47,7 @@ const FeedPost = ({ post , index, initialPreloaded=false}: {post:Post, index:num
   };
   useEffect(() => {
     loadImage()
-  })
+  }, [])
 
 
   return (

@@ -34,9 +34,9 @@ const useContentFetcher = (initialContent:Post[]) => {
   }, [initialContent]);
 
 
-  useEffect(() => {
-    setLoading(!fetchComplete);
-  }, [fetchComplete]);
+  // useEffect(() => {
+  //   setLoading(!fetchComplete);
+  // }, [fetchComplete]);
 
 
   return { content, loading, error, fetchComplete, setLoading };
